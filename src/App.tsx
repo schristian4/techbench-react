@@ -1,24 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import * as React from 'react';
+//Function and Data Imports
+import { fetchCityData, cityDataType } from "./cityDataTypes";
+import { groupBy, nestGroupsBy } from './groupFunction';
+
+//Component Imports
+import { IncidentBanner } from './components/IncidentBannerComponent';
+import { IconLegend } from './components/IconLegendComponent';
+import { DataTable } from './components/DataTableComponent';
+import { DropDownList } from './components/DropDownComponent';
+
+//Style Imports
 import './App.css';
 
 function App() {
+  const [data, setData] = React.useState<cityDataType[]>([]);
+
+  const handleSubmit = async () => {
+    fetchCityData().then((data) => setData(data));
+  };
+  
+  handleSubmit();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container bg-dark bg-gradient">
+        <nav className="navbar navbar-dark var-dark">
+          <div className="container-fluid">
+            <a className="navbar-brand" href="#">
+              AlertSite Technical Bench
+            </a>
+            <i className="check"> </i>
+          </div>
+          <DropDownList {...data} />
+        </nav>
+        {/* <IncidentBannerComponent />
+        <DataTableComponent />
+        <IconLegend /> */}
+      </div>
     </div>
   );
 }
