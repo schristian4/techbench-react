@@ -1,13 +1,35 @@
-import {  cityDataType } from "../cityDataTypes";
+import { useState, useEffect } from 'react'
 
+import { cityDataType } from '../cityDataTypes'
+import { nestGroupsBy } from '../groupFunction'
 
-export const DropDownList = (props: cityDataType[]) => {
-  console.log(props[0])
-    return (
-      <select
-        id="cityDropDown"
-        className="form-select dropdown-toggle"
-        aria-label="Default select example"
-      ></select>
-    );
-  };
+export const DropDownList = ({ dataObject }: { dataObject: cityDataType[] }) => {
+  
+  let siteObject = nestGroupsBy(dataObject, ['obj_location', 'device_descrip'])
+  let [locationList, setLocationList] = useState(siteObject)
+  
+  let LocationKeyList = Object.keys(locationList)
+  let siteKeyList = Object.keys(locationList[LocationKeyList[0]])
+  
+  const CreatDropDownMenu = ()=>{
+    // debugger
+    for (let i = 0; i < siteKeyList.length; i++) {
+      const optionObject = LocationKeyList.map((locationID) => {
+        let locationName = siteObject[locationID][siteKeyList[0]][0].location_descrip
+        return (
+          <option key={locationID} value={locationID}>
+            {locationName}
+          </option>
+        )
+      })
+      return optionObject
+    }
+  }
+  
+  return (
+    <>
+      {CreatDropDownMenu()}
+    </>
+  )
+}
+
