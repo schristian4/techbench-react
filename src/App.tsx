@@ -31,19 +31,17 @@ function App() {
     if (data.length === 0 || data === undefined || data === null) {
       // debugger
       setBusy(true)
-      console.log(isBusy)
     } else {
       // debugger
       setBusy(false);
       setSelectedOption("10");
-      console.log(isBusy)
+      
     }
   }
-  console.log('rendered')
+
   console.log('Selected Option:' + selectedOption)
   React.useEffect(() => {
     initializeData()
-    console.log('Effect rendered')
   }, [data])
 
   return (
@@ -64,8 +62,10 @@ function App() {
                     setSelectedOption(optionSelect)
                   }}
                 >
+                  
                   <DropDownList dataObject={data} />
                 </select>
+                
               ) : (
                 <div style={{ color: 'white' }}>Loading....</div>
               )}

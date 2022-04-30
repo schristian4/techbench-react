@@ -25,7 +25,6 @@ export const DropDownList = ({ dataObject }: { dataObject: cityDataType[] }) => 
       return optionObject
     }
   }
-  
   return (
     <>
       {CreatDropDownMenu()}
