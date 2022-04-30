@@ -38,6 +38,9 @@ export type cityDataType = {
   status_warning: string;
 };
 
+export interface dropDownValue{
+  values: string
+}
 // Returns a promise value that contains data object
 export const fetchCityData = () => {
   return Promise.resolve(data);
