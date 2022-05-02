@@ -17,43 +17,33 @@ export const DataTable = ({
 
   const majorSiteNameArray = Object.keys(majorSiteObjectTarget)
 
-  const gridEntry = (percentage: string | number, inputDate: any, inputTime: any) => {
+  const gridEntry = (percentage: string | number, inputDate: any, inputTime: any, index: number) => {
     let minibar__bar = 'minibar__bar'
     let minibar__fill = 'minibar__fill'
     if (Number(inputTime) == 0) {
       minibar__bar = 'minibar__bar red'
       minibar__fill = 'minibar__fill red'
     }
-    percentage = percentage + "%"
+    percentage = percentage + '%'
     return (
-      <div className={minibar__bar}>
+      <div key={index} className={minibar__bar}>
         <span className="minibar__tooltip">
           <div>Date: {inputDate}</div>
           <div>Response Time: {Number(inputTime).toFixed(3)}</div>
         </span>
         <div className={minibar__fill} style={{ height: percentage }}></div>
       </div>
-
-      // <div class="minibar__bar">
-      //     <span class="minibar__tooltip">
-      //       <div>Date: 2021-04-04 08:15:16</div>
-      //       <div>Response Time: 0.085s</div>
-      //     </span>
-      //     <div class="minibar__fill" style="height:100%"></div>
-      //   </div>
     )
   }
 
   const createResponseTimeGrid = (timestampArray: any[], responseTimeArray: any[]) => {
-    let tempArray = []
+    let tempArray: any[] = []
     tempArray.push(timestampArray, responseTimeArray)
 
     let inputSelection, heightPercentage
-    for (let i = 0; i < tempArray[0].length; i++) {
-      console.log(i)
-      debugger
+    return tempArray[0].map((item: any, index: number) => {
       if (tempArray[1].length > 1) {
-        inputSelection = tempArray[1][i]
+        inputSelection = tempArray[1][index]
         let minValue = Math.min(...tempArray[1])
         let maxValue = Math.max(...tempArray[1])
 
@@ -62,16 +52,12 @@ export const DataTable = ({
           heightPercentage = 100
         }
       } else {
-        inputSelection = tempArray[1][i]
+        inputSelection = tempArray[1][index]
         heightPercentage = 100
       }
 
-      return (
-        <>
-          {gridEntry(heightPercentage, tempArray[0][i], tempArray[1][i])}
-        </>
-      )
-    }
+      return gridEntry(heightPercentage, tempArray[0][index], tempArray[1][index], index)
+    })
   }
 
   const IconStatus = (avail: any) => {
@@ -109,9 +95,7 @@ export const DataTable = ({
           <td className="iconWrapper">{IconStatus(avail)}</td>
           <td>{majorSiteNameArray[index]}</td>
           <td className="availablityCharm">{avail}%</td>
-          <td className="minibar minibar--mini">
-           {tdResp}
-          </td>
+          <td className="minibar minibar--mini">{tdResp}</td>
         </tr>
       )
     })
