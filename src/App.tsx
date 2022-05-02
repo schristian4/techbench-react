@@ -17,29 +17,26 @@ function App() {
   const [data, setData] = React.useState<cityDataType[]>([])
   const [isBusy, setBusy] = React.useState(true)
   const [selectedOption, setSelectedOption] = React.useState('')
-  // const [isOpen, setOpenState] = React.useState(true)
 
   const initializeData = () => {
     fetchCityData()
       .then((data) => setData(data))
       .then(() => {
-        console.log('Busy State: ' + isBusy)
+        // console.log('Busy State: ' + isBusy)
         isLoading()
       })
   }
   function isLoading() {
     if (data.length === 0 || data === undefined || data === null) {
-      // debugger
       setBusy(true)
     } else {
-      // debugger
       setBusy(false);
-      setSelectedOption("10");
-      
+      const defaultOption = nestGroupsBy(data, ['obj_location', 'device_descrip'])
+      setSelectedOption(Object.keys(defaultOption)[0]);
     }
   }
-
-  console.log('Selected Option:' + selectedOption)
+// 
+  // console.log('Selected Option:' + selectedOption)
   React.useEffect(() => {
     initializeData()
   }, [data])
@@ -56,13 +53,12 @@ function App() {
               <i className="check"></i>5
               {!isBusy ? (
                 <select
-                  defaultValue={'10'}
+                  defaultValue={selectedOption}
                   onChange={(e) => {
                     let optionSelect = e.target.value
                     setSelectedOption(optionSelect)
                   }}
                 >
-                  
                   <DropDownList dataObject={data} />
                 </select>
                 
@@ -71,11 +67,12 @@ function App() {
               )}
             </div>
           </nav>
+          {!isBusy && <DataTable dataObject={data} selectedOption={selectedOption}/>}
           <div style={{ color: 'white' }}>{selectedOption}</div>
-
-          <button className="btn btn-primary">Click Me</button>
+          
+          {/* <button className="btn btn-primary">Click Me</button> */}
           {/* <IncidentBannerComponent />
-             <DataTableComponent />
+             
             <IconLegend /> */}
         </div>
       </div>

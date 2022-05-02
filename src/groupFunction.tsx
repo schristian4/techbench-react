@@ -1,14 +1,13 @@
 
 export function groupBy(conversions: any, property: any) {
-    let returnObj = conversions.reduce((acc: any, obj: any) => {
-      let key: any = obj[property];
+    return conversions.reduce((acc: any, obj: any) => {
+      let key = obj[property];
       if (!acc[key]) {
         acc[key] = [];
       }
       acc[key].push(obj);
       return acc;
     }, {});
-    return returnObj;
   }
   
 export function nestGroupsBy(arr: {}, properties: any) {
@@ -17,7 +16,7 @@ export function nestGroupsBy(arr: {}, properties: any) {
       return groupBy(arr, properties[0]);
     }
     const property = properties.shift();
-    let grouped: any = groupBy(arr, property);
+    var grouped: any = groupBy(arr, property);
     for (let key in grouped) {
       grouped[key] = nestGroupsBy(grouped[key], Array.from(properties));
     }
