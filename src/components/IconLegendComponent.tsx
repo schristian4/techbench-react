@@ -1,6 +1,6 @@
 export const IconLegend = () => {
     return (
-      <div className="icon-legend">
+      <div className="col-3 icon-legend">
         <div className="iconContainer">
           <div className="iconWrapper">
             <i className="iconStatus icon-check"></i>
@@ -18,10 +18,10 @@ export const IconLegend = () => {
   
         <div>
           <p>If you wish to create a case with Customer Care, please visit</p>
-          <a
-            href={"https://support.smartbear.com/message/?prod=Alertsite"}
-            target={"_blank"}
-          ></a>
+          {/* <a
+            
+            target="_blank"
+          ></a> */}
         </div>
       </div>
     );

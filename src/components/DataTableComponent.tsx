@@ -1,5 +1,5 @@
 import { cityDataType } from '../cityDataTypes'
-import { nestGroupsBy } from '../groupFunction'
+import { nestGroupsBy } from '../groupFunctions'
 import { createParameterArray, availability } from './moduleFunctions'
 
 export const DataTable = ({

@@ -1,21 +1,19 @@
-import { useState, useEffect } from 'react'
 
 import { cityDataType } from '../cityDataTypes'
-import { nestGroupsBy } from '../groupFunction'
+import { nestGroupsBy } from '../groupFunctions'
+import { useState } from 'react'
 
 export const DropDownList = ({ dataObject }: { dataObject: cityDataType[] }) => {
   
   let siteObject = nestGroupsBy(dataObject, ['obj_location', 'device_descrip'])
-  let [locationList, setLocationList] = useState(siteObject)
-  
-  let locationKeyList = Object.keys(locationList)
-  let siteKeyList = Object.keys(locationList[locationKeyList[0]])
+  let locationKeyArray = Object.keys(siteObject)
+  let siteKeyArray = Object.keys(siteObject[locationKeyArray[0]])
   
   const CreatDropDownMenu = ()=>{
     // debugger
-    for (let i = 0; i < siteKeyList.length; i++) {
-      const optionObject = locationKeyList.map((locationID) => {
-        let locationName = siteObject[locationID][siteKeyList[0]][0].location_descrip
+    for (let i = 0; i < siteKeyArray.length; i++) {
+      const optionObject = locationKeyArray.map((locationID) => {
+        let locationName = siteObject[locationID][siteKeyArray[0]][0].location_descrip
         return (
           <option key={locationID} value={locationID}>
             {locationName}

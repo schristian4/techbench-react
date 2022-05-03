@@ -2,7 +2,7 @@ import * as React from 'react'
 
 //Function and Data Imports
 import { fetchCityData, cityDataType } from './cityDataTypes'
-import { groupBy, nestGroupsBy } from './groupFunction'
+import { nestGroupsBy } from './groupFunctions'
 
 //Component Imports
 import { IncidentBanner } from './components/IncidentBannerComponent'
@@ -39,13 +39,18 @@ function App() {
   }, [data])
 
   return (
-    <div className="App">
+    <div className='row'>
         {!isBusy ? 
-        (<div className="container bg-dark bg-gradient">
+        (<div className="col w-100 bg-dark bg-gradient">
           <nav className="navbar navbar-dark var-dark">
-            <a className="navbar-brand" href="#">AlertSite Technical Bench</a>
-            <i className="check"></i>
+            <div className="container-fluid">
+              <a className="navbar-brand" href="#">AlertSite Technical Bench</a>
+              <i className="check"></i>
+            </div>
             <select
+                title='City DropDown Menu'
+                id='cityDropDown'
+                className='form-select dropdown-toggle'
                 defaultValue={selectedOption}
                 onChange={(e) => {
                   let optionSelect = e.target.value
@@ -59,34 +64,8 @@ function App() {
         </div>) : (
           <div style={{ color: 'white' }}>Loading....</div>
         )}
+        {/* <IconLegend /> */}
     </div>
   )
 }
-export default App
-/*
----
-
-    let siteObject = nestGroupsBy(cityObject, [
-      "obj_location",
-      "device_descrip"
-    ]);
-
-    module.siteObject = siteObject;
-
-    table.initialize();
-    table.outputTest();
-    incidentbanner.initialize();
-    const select = document.querySelector("#cityDropDown");
- 
-    select.addEventListener("input", (event) => {
-      table.dropDownSelection = event.target.selectedIndex;
-      incidentbanner.dropDownSelection = event.target.selectedIndex;
-      //console.log("🚀 ~ Select index Value: " + event.target.selectedIndex);
-
-      table.initialize(event.target.selectedIndex);
-      table.createGridHoverElements();
-      incidentbanner.initialize(event.target.selectedIndex);
-    });
-    table.createGridHoverElements();
-  };
-  printItems(); */
+export default App;

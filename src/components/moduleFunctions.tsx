@@ -1,3 +1,4 @@
+
 export function createParameterArray(
   location: string,
   param: string,
