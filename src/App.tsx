@@ -22,7 +22,6 @@ function App() {
     fetchCityData()
       .then((data) => setData(data))
       .then(() => {
-        // console.log('Busy State: ' + isBusy)
         isLoading()
       })
   }
@@ -35,52 +34,35 @@ function App() {
       setSelectedOption(Object.keys(defaultOption)[0]);
     }
   }
-// 
-  // console.log('Selected Option:' + selectedOption)
   React.useEffect(() => {
     initializeData()
   }, [data])
 
   return (
     <div className="App">
-      <div className="container bg-dark bg-gradient">
-        <div>
+        {!isBusy ? 
+        (<div className="container bg-dark bg-gradient">
           <nav className="navbar navbar-dark var-dark">
-            <div className="container-fluid">
-              <a className="navbar-brand" href="#">
-                AlertSite Technical Bench
-              </a>
-              <i className="check"></i>5
-              {!isBusy ? (
-                <select
-                  defaultValue={selectedOption}
-                  onChange={(e) => {
-                    let optionSelect = e.target.value
-                    setSelectedOption(optionSelect)
-                  }}
-                >
-                  <DropDownList dataObject={data} />
-                </select>
-                
-              ) : (
-                <div style={{ color: 'white' }}>Loading....</div>
-              )}
-            </div>
+            <a className="navbar-brand" href="#">AlertSite Technical Bench</a>
+            <i className="check"></i>
+            <select
+                defaultValue={selectedOption}
+                onChange={(e) => {
+                  let optionSelect = e.target.value
+                  setSelectedOption(optionSelect)
+                }}>
+                <DropDownList dataObject={data} />
+            </select>
           </nav>
-          {!isBusy && <DataTable dataObject={data} selectedOption={selectedOption}/>}
-          <div style={{ color: 'white' }}>{selectedOption}</div>
-          
-          {/* <button className="btn btn-primary">Click Me</button> */}
-          {/* <IncidentBannerComponent />
-             
-            <IconLegend /> */}
-        </div>
-      </div>
+          <IncidentBanner dataObject={data} />
+          <DataTable dataObject={data} selectedOption={selectedOption}/>
+        </div>) : (
+          <div style={{ color: 'white' }}>Loading....</div>
+        )}
     </div>
   )
 }
 export default App
-
 /*
 ---
 

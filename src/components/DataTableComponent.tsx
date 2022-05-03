@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react'
-
 import { cityDataType } from '../cityDataTypes'
 import { nestGroupsBy } from '../groupFunction'
 import { createParameterArray, availability } from './moduleFunctions'
@@ -12,9 +10,7 @@ export const DataTable = ({
   selectedOption: any
 }) => {
   const siteObject = nestGroupsBy(dataObject, ['obj_location', 'device_descrip'])
-
   const majorSiteObjectTarget = siteObject[selectedOption]
-
   const majorSiteNameArray = Object.keys(majorSiteObjectTarget)
 
   const gridEntry = (percentage: string | number, inputDate: any, inputTime: any, index: number) => {
@@ -69,6 +65,7 @@ export const DataTable = ({
       return <i className="iconStatus icon-danger"></i>
     }
   }
+
   const TableContents = () => {
     let rowItem = majorSiteNameArray.map((majorSite, index) => {
       console.log(`Table row${index} Major Site::${majorSite}`)
@@ -89,7 +86,6 @@ export const DataTable = ({
         siteObject
       )
       let tdResp = createResponseTimeGrid(dt_statusOutput, resptimeOutput)
-
       return (
         <tr key={index}>
           <td className="iconWrapper">{IconStatus(avail)}</td>

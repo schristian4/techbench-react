@@ -1,4 +1,4 @@
-import { data } from "./cityData";
+import { data } from "./cityData3";
 
 // Exported types for data object 👏👍
 export type cityDataType = {

@@ -6,17 +6,17 @@ class IncidentBanner {
     this.updateAlertBanner();
   }
 
-  createAlertItem(locationName, count) {
-    let parentDiv = module.createEle("div", null, ["alertItem"]);
-    let heading = module.createEle("h1", locationName, null);
-    let counterDiv = module.createEle("div", null, ["count-text"]);
-    let pHeading = module.createEle("p", "Error Count:", null);
-    let pCount = module.createEle("p", count, null);
+  // createAlertItem(locationName, count) {
+  //   let parentDiv = module.createEle("div", null, ["alertItem"]);
+  //   let heading = module.createEle("h1", locationName, null);
+  //   let counterDiv = module.createEle("div", null, ["count-text"]);
+  //   let pHeading = module.createEle("p", "Error Count:", null);
+  //   let pCount = module.createEle("p", count, null);
 
-    module.appendAllElements([pHeading, pCount], counterDiv);
-    module.appendAllElements([heading, counterDiv], parentDiv);
-    return parentDiv;
-  }
+  //   module.appendAllElements([pHeading, pCount], counterDiv);
+  //   module.appendAllElements([heading, counterDiv], parentDiv);
+  //   return parentDiv;
+  // }
   //Count the number of Errors return value of count
   counter(targetArray) {
     let counter = 0;
