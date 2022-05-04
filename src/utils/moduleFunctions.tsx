@@ -26,6 +26,7 @@ function filterMajorSite(tempArray: object[], filters: object[], majoreSiteName:
     if (i === majoreSiteName) {
       for (let key in filters[i]) {
         return tempArray.push(filters[majoreSiteName][key][param])
+        console.log(test)
       }
     }
   }
