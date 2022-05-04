@@ -1,7 +1,7 @@
 
-import { cityDataType } from '../cityDataTypes'
-import { nestGroupsBy } from '../groupFunctions'
-import { useState } from 'react'
+import { cityDataType } from './cityDataTypes'
+import { nestGroupsBy } from '../utils/groupFunctions'
+
 
 export const DropDownList = ({ dataObject }: { dataObject: cityDataType[] }) => {
   

@@ -1,4 +1,3 @@
-import { data } from "./cityData3";
 
 // Exported types for data object 👏👍
 export type cityDataType = {
@@ -41,7 +40,3 @@ export type cityDataType = {
 export interface dropDownValue{
   values: string
 }
-// Returns a promise value that contains data object
-export const fetchCityData = () => {
-  return Promise.resolve(data);
-};

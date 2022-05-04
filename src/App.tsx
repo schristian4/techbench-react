@@ -1,17 +1,15 @@
 import * as React from 'react'
 
 //Function and Data Imports
-import { fetchCityData, cityDataType } from './cityDataTypes'
-import { nestGroupsBy } from './groupFunctions'
+import { fetchData } from './api/Api'
+import { cityDataType } from './components/cityDataTypes'
+import { nestGroupsBy } from './utils/groupFunctions'
 
 //Component Imports
 import { IncidentBanner } from './components/IncidentBannerComponent'
-import { IconLegend } from './components/IconLegendComponent'
+// import { IconLegend } from './components/IconLegendComponent'
 import { DataTable } from './components/DataTableComponent'
-import { DropDownList } from './components/DropDownComponent'
-
-//Style Imports
-import './App.css'
+import { NavBar } from './components/NavBarComponent'
 
 function App() {
   const [data, setData] = React.useState<cityDataType[]>([])
@@ -19,53 +17,45 @@ function App() {
   const [selectedOption, setSelectedOption] = React.useState('')
 
   const initializeData = () => {
-    fetchCityData()
+    fetchData()
       .then((data) => setData(data))
       .then(() => {
         isLoading()
+        setInitialOptionValue()
       })
   }
   function isLoading() {
-    if (data.length === 0 || data === undefined || data === null) {
+    if (data.length === 0 || data === undefined) {
       setBusy(true)
     } else {
-      setBusy(false);
-      const defaultOption = nestGroupsBy(data, ['obj_location', 'device_descrip'])
-      setSelectedOption(Object.keys(defaultOption)[0]);
+      setBusy(false)
     }
+  }
+  function setInitialOptionValue() {
+    const defaultOption = nestGroupsBy(data, ['obj_location', 'device_descrip'])
+    setSelectedOption(Object.keys(defaultOption)[0])
   }
   React.useEffect(() => {
     initializeData()
   }, [data])
 
   return (
-    <div className='row'>
-        {!isBusy ? 
-        (<div className="col w-100 bg-dark bg-gradient">
-          <nav className="navbar navbar-dark var-dark">
-            <div className="container-fluid">
-              <a className="navbar-brand" href="#">AlertSite Technical Bench</a>
-              <i className="check"></i>
-            </div>
-            <select
-                title='City DropDown Menu'
-                id='cityDropDown'
-                className='form-select dropdown-toggle'
-                defaultValue={selectedOption}
-                onChange={(e) => {
-                  let optionSelect = e.target.value
-                  setSelectedOption(optionSelect)
-                }}>
-                <DropDownList dataObject={data} />
-            </select>
-          </nav>
+    <div className="row">
+      {!isBusy ? (
+        <div className="col w-100 bg-dark bg-gradient">
+          <NavBar
+            dataObject={data}
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
+          />
           <IncidentBanner dataObject={data} />
-          <DataTable dataObject={data} selectedOption={selectedOption}/>
-        </div>) : (
-          <div style={{ color: 'white' }}>Loading....</div>
-        )}
-        {/* <IconLegend /> */}
+          <DataTable dataObject={data} selectedOption={selectedOption} />
+        </div>
+      ) : (
+        <div style={{ color: 'white' }}>Loading....</div>
+      )}
+      {/* <IconLegend /> */}
     </div>
   )
 }
-export default App;
+export default App

@@ -1,9 +1,9 @@
-import { cityDataType } from '../cityDataTypes'
-import { nestGroupsBy } from '../groupFunctions'
-import { createParameterArray } from './moduleFunctions'
+import { cityDataType } from './cityDataTypes'
+import { nestGroupsBy } from '../utils/groupFunctions'
+import { createParameterArray } from '../utils/moduleFunctions'
 
 //Function to Count the number of errors at each Location
-function counter(targetArray: string[]) {
+function counter(targetArray: string[]): number{
   let counter = 0
   for (let i = 0; i < targetArray.length; i++) {
     if (targetArray[i] !== '0') {
@@ -18,6 +18,7 @@ export const IncidentBanner = ({ dataObject }: { dataObject: cityDataType[] }) =
   //Formated Data Object
   const siteObject = nestGroupsBy(dataObject, ['obj_location', 'device_descrip'])
   let LocationKeyArray = Object.keys(siteObject)
+  let firstSiteKeyPosition = Object.keys(siteObject[LocationKeyArray[0]])[0]
 
   const createAlertItem = (locationName: string, count: number, index: number) => {
     return (
@@ -31,10 +32,8 @@ export const IncidentBanner = ({ dataObject }: { dataObject: cityDataType[] }) =
     )
   }
 
-
-  let firstSiteKeyPosition = Object.keys(siteObject[LocationKeyArray[0]])[0]
   const updateAlertBanner = () => {
-    let incidentCityReturnObject: any[] = []
+    let incidentCityReturnObject: JSX.Element[] = []
     for (let i = 0; i < LocationKeyArray.length; i++) {
       let locationName = siteObject[LocationKeyArray[i]][firstSiteKeyPosition][0].location_descrip
       let siteKeyArray = Object.keys(siteObject[LocationKeyArray[i]])
@@ -46,13 +45,11 @@ export const IncidentBanner = ({ dataObject }: { dataObject: cityDataType[] }) =
           locationErrorCount +
           counter(createParameterArray(locationNumberID, 'status', targetMajorSite, siteObject)))
       })
-      // console.log(`Location #:${locationNumberID} Location Error Count:${locationErrorCount}`)
       if (locationErrorCount > 0) {
         let incidentBannerOBject = createAlertItem(locationName, locationErrorCount, i)
         incidentCityReturnObject.push(incidentBannerOBject)
       }
     }
-
     return incidentCityReturnObject
   }
 

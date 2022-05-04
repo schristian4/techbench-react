@@ -1,19 +1,24 @@
-import { cityDataType } from '../cityDataTypes'
-import { nestGroupsBy } from '../groupFunctions'
-import { createParameterArray, availability } from './moduleFunctions'
+import { cityDataType } from './cityDataTypes'
+import { nestGroupsBy } from '../utils/groupFunctions'
+import { createParameterArray, getPercentage } from '../utils/moduleFunctions'
 
 export const DataTable = ({
   dataObject,
   selectedOption,
 }: {
   dataObject: cityDataType[]
-  selectedOption: any
+  selectedOption: string
 }) => {
   const siteObject = nestGroupsBy(dataObject, ['obj_location', 'device_descrip'])
   const majorSiteObjectTarget = siteObject[selectedOption]
   const majorSiteNameArray = Object.keys(majorSiteObjectTarget)
 
-  const gridEntry = (percentage: string | number, inputDate: any, inputTime: any, index: number) => {
+  const gridEntry = (
+    percentage: string | number,
+    inputDate: string,
+    inputTime: string,
+    index: number
+  ) => {
     let minibar__bar = 'minibar__bar'
     let minibar__fill = 'minibar__fill'
     if (Number(inputTime) == 0) {
@@ -32,7 +37,7 @@ export const DataTable = ({
     )
   }
 
-  const createResponseTimeGrid = (timestampArray: any[], responseTimeArray: any[]) => {
+  const createResponseTimeGrid = (timestampArray: number[], responseTimeArray: any[]) => {
     let tempArray: any[] = []
     tempArray.push(timestampArray, responseTimeArray)
 
@@ -67,10 +72,9 @@ export const DataTable = ({
   }
 
   const TableContents = () => {
-    let rowItem = majorSiteNameArray.map((majorSite, index) => {
-      console.log(`Table row${index} Major Site::${majorSite}`)
-      // let targetObject = majorSiteObjectTarget[majorSiteNameArray[index]]
-      let avail = availability(
+    let rowItem = majorSiteNameArray.map((_, index) => {
+      // console.log(`Table row${index} Major Site::${majorSite}`)
+      let avail = getPercentage(
         createParameterArray(selectedOption, 'status', majorSiteNameArray[index], siteObject)
       )
       let dt_statusOutput = createParameterArray(
