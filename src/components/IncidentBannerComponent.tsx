@@ -3,7 +3,7 @@ import { nestGroupsBy } from '../utils/groupFunctions'
 import { createParameterArray } from '../utils/moduleFunctions'
 
 //Function to Count the number of errors at each Location
-function counter(targetArray: string[]): number{
+function counter(targetArray: any[]): number{
   let counter = 0
   for (let i = 0; i < targetArray.length; i++) {
     if (targetArray[i] !== '0') {
@@ -37,10 +37,10 @@ export const IncidentBanner = ({ dataObject }: { dataObject: cityDataType[] }) =
     for (let i = 0; i < LocationKeyArray.length; i++) {
       let locationName = siteObject[LocationKeyArray[i]][firstSiteKeyPosition][0].location_descrip
       let siteKeyArray = Object.keys(siteObject[LocationKeyArray[i]])
-      let locationNumberID = LocationKeyArray[i]
+      let locationNumberID: number = Number(LocationKeyArray[i])
       let locationErrorCount: number = 0
 
-      siteKeyArray.map((targetMajorSite) => {
+      siteKeyArray.map((targetMajorSite: string) => {
         return (locationErrorCount =
           locationErrorCount +
           counter(createParameterArray(locationNumberID, 'status', targetMajorSite, siteObject)))

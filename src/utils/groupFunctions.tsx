@@ -1,7 +1,9 @@
 
+import { cityDataType } from '../components/cityDataTypes'
+
 export function groupBy(conversions: any, property: any) {
-    return conversions.reduce((acc: any, obj: any) => {
-      let key = obj[property];
+  return conversions.reduce((acc: any, obj: any) => {
+    let key = obj[property];
       if (!acc[key]) {
         acc[key] = [];
       }
@@ -11,15 +13,16 @@ export function groupBy(conversions: any, property: any) {
   }
   
 export function nestGroupsBy(arr: {}, properties: any) {
-    properties = Array.from(properties);
+    property = Array.from(properties);
     if (properties.length === 1) {
       return groupBy(arr, properties[0]);
     }
-    const property = properties.shift();
-    var grouped: any = groupBy(arr, property);
+    var property = properties.shift();
+    var grouped = groupBy(arr, property);
     for (let key in grouped) {
       grouped[key] = nestGroupsBy(grouped[key], Array.from(properties));
     }
+    
     return grouped;
   }
   /**
@@ -29,4 +32,3 @@ export function nestGroupsBy(arr: {}, properties: any) {
    * @param {Object[]} conversions
    * @returns {Object}
    */
-  

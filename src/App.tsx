@@ -7,7 +7,7 @@ import { nestGroupsBy } from './utils/groupFunctions'
 
 //Component Imports
 import { IncidentBanner } from './components/IncidentBannerComponent'
-// import { IconLegend } from './components/IconLegendComponent'
+import { IconLegend } from './components/IconLegendComponent'
 import { DataTable } from './components/DataTableComponent'
 import { NavBar } from './components/NavBarComponent'
 
@@ -26,8 +26,10 @@ function App() {
   }
   function isLoading() {
     if (data.length === 0 || data === undefined) {
+ 
       setBusy(true)
     } else {
+
       setBusy(false)
     }
   }
@@ -43,6 +45,7 @@ function App() {
     <div className="row">
       {!isBusy ? (
         <div className="col w-100 bg-dark bg-gradient">
+          
           <NavBar
             dataObject={data}
             selectedOption={selectedOption}

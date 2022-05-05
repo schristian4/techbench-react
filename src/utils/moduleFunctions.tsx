@@ -1,17 +1,30 @@
 export function createParameterArray(
-  location: any,
+  location: number,
   param: string,
-  majoreSiteName:string[],
-  siteObject: number[]
+  majorSiteName: any,
+  siteObject: any
 ) {
-  let filters: any = siteObject[location]
-  console.log(filters)
-  let tempArray: object[] = []
-  filterMajorSite(tempArray, filters, majoreSiteName, param)
+  let filters = siteObject[location]
+
+  let tempArray = []
+  if (majorSiteName === undefined || majorSiteName === null) {
+    for (let i in filters) {
+      for (let key in filters[i]) {
+        tempArray.push(filters[i][key][param])
+      }
+    }
+  } else {
+    for (let i in filters) {
+      if (i === majorSiteName) {
+        for (let key in filters[i]) {
+          tempArray.push(filters[majorSiteName][key][param])
+        }
+      }
+    }
+  }
   return tempArray
 }
-
-export function getPercentage(paramArray: string[]) {
+export function getPercentage(paramArray: string[]){
   let errorCounter = 0
   for (let i = 0; i < paramArray.length; i++) {
     if (parseInt(paramArray[i]) !== 0) {
@@ -21,13 +34,3 @@ export function getPercentage(paramArray: string[]) {
   return 100 - Math.round((errorCounter / paramArray.length) * 100)
 }
 
-function filterMajorSite(tempArray: object[], filters: object[], majoreSiteName: string | number,param: string ){
-  for (let i in filters) {
-    if (i === majoreSiteName) {
-      for (let key in filters[i]) {
-        return tempArray.push(filters[majoreSiteName][key][param])
-        console.log(test)
-      }
-    }
-  }
-}

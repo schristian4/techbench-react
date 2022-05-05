@@ -75,16 +75,16 @@ export const DataTable = ({
     let rowItem = majorSiteNameArray.map((_, index) => {
       // console.log(`Table row${index} Major Site::${majorSite}`)
       let avail = getPercentage(
-        createParameterArray(selectedOption, 'status', majorSiteNameArray[index], siteObject)
+        createParameterArray(Number(selectedOption), 'status', majorSiteNameArray[index], siteObject)
       )
       let dt_statusOutput = createParameterArray(
-        selectedOption,
+        Number(selectedOption),
         'dt_status',
         majorSiteNameArray[index],
         siteObject
       )
       let resptimeOutput = createParameterArray(
-        selectedOption,
+        Number(selectedOption),
         'resptime',
         majorSiteNameArray[index],
         siteObject
