@@ -36,7 +36,3 @@ export type cityDataType = {
   test_cnt: string;
   status_warning: string;
 };
-
-export interface dropDownValue{
-  values: string
-}

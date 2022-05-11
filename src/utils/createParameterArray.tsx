@@ -5,8 +5,7 @@ export function createParameterArray(
   siteObject: any
 ) {
   let filters = siteObject[location]
-
-  let tempArray = []
+  let tempArray: object[] = []
   if (majorSiteName === undefined || majorSiteName === null) {
     for (let i in filters) {
       for (let key in filters[i]) {
@@ -24,13 +23,3 @@ export function createParameterArray(
   }
   return tempArray
 }
-export function getPercentage(paramArray: string[]){
-  let errorCounter = 0
-  for (let i = 0; i < paramArray.length; i++) {
-    if (parseInt(paramArray[i]) !== 0) {
-      errorCounter++
-    }
-  }
-  return 100 - Math.round((errorCounter / paramArray.length) * 100)
-}
-

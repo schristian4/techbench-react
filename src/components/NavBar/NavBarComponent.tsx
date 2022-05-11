@@ -1,5 +1,5 @@
-import { cityDataType } from './cityDataTypes'
-import { DropDownList } from './DropDownComponent'
+import { cityDataType } from '../../data/cityDataTypes'
+import { DropDownList } from '../DropDown/DropDownComponent'
 
 export const NavBar = ({
   dataObject,
@@ -13,7 +13,7 @@ export const NavBar = ({
   return (
     <nav className="navbar navbar-dark var-dark">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href="/#">
           AlertSite Technical Bench
         </a>
         <i className="check"></i>

@@ -1,6 +1,6 @@
-import { cityDataType } from './cityDataTypes'
-import { nestGroupsBy } from '../utils/groupFunctions'
-import { createParameterArray } from '../utils/moduleFunctions'
+import { cityDataType } from '../../data/cityDataTypes'
+import { nestGroupsBy } from '../../utils/groupFunctions'
+import { createParameterArray } from '../../utils/createParameterArray'
 
 //Function to Count the number of errors at each Location
 function counter(targetArray: any[]): number{
@@ -14,7 +14,7 @@ function counter(targetArray: any[]): number{
 }
 
 //Create Incident Banner
-export const IncidentBanner = ({ dataObject }: { dataObject: cityDataType[] }) => {
+export const AlertBanner = ({ dataObject }: { dataObject: cityDataType[] }) => {
   //Formated Data Object
   const siteObject = nestGroupsBy(dataObject, ['obj_location', 'device_descrip'])
   let LocationKeyArray = Object.keys(siteObject)
@@ -46,8 +46,8 @@ export const IncidentBanner = ({ dataObject }: { dataObject: cityDataType[] }) =
           counter(createParameterArray(locationNumberID, 'status', targetMajorSite, siteObject)))
       })
       if (locationErrorCount > 0) {
-        let incidentBannerOBject = createAlertItem(locationName, locationErrorCount, i)
-        incidentCityReturnObject.push(incidentBannerOBject)
+        let AlertBannerOBject = createAlertItem(locationName, locationErrorCount, i)
+        incidentCityReturnObject.push(AlertBannerOBject)
       }
     }
     return incidentCityReturnObject
@@ -58,7 +58,7 @@ export const IncidentBanner = ({ dataObject }: { dataObject: cityDataType[] }) =
       <p className="bg-gradient" style={{ color: 'white', fontWeight: 'bold' }}>
         Incident History Log
       </p>
-      <div id="IncidentBanner" className='incidentLog-container'>
+      <div id="AlertBanner" className='incidentLog-container'>
         {updateAlertBanner().map((x) => {
           return x
         })}

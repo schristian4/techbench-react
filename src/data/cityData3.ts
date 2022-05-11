@@ -1,4 +1,4 @@
-export const data = [
+export const dataSmall = [
     {
       "status_verify": "0",
       "dejatime_firstpaint": "0",
