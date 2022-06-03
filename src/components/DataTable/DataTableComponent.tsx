@@ -23,13 +23,9 @@ export const DataTable = ({
     inputDate: string,
     inputTime: string,
     index: number
-  ) => {
-    let minibar__bar = 'minibar__bar'
-    let minibar__fill = 'minibar__fill'
-    if (Number(inputTime) === 0) {
-      minibar__bar = 'minibar__bar red'
-      minibar__fill = 'minibar__fill red'
-    }
+  ) => {    
+    let minibar__bar = Number(inputTime) === 0 ?  "minibar__bar red" : "minibar__bar "
+    let minibar__fill = Number(inputTime) === 0 ?  "minibar__fill red" :"minibar__fill "
     percentage = percentage + '%'
     return (
       <div key={index} className={minibar__bar}>
@@ -47,8 +43,8 @@ export const DataTable = ({
     responseTimeArray: string | string[]
   ): {} => {
     let tempArray: any[] = []
-    tempArray.push(timestampArray, responseTimeArray)
     let inputSelection, heightPercentage
+    tempArray.push(timestampArray, responseTimeArray)
     return tempArray[0].map((item: any, index: number) => {
       if (tempArray[1].length > 1) {
         inputSelection = tempArray[1][index]

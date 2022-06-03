@@ -23,6 +23,7 @@ export const NavBar = ({
         id="cityDropDown"
         className="form-select dropdown-toggle"
         defaultValue={selectedOption}
+        
         onChange={(e) => {
           let optionSelect = e.target.value
           setSelectedOption(optionSelect)

@@ -14,7 +14,7 @@ export const DropDownList = ({ dataObject }: { dataObject: cityDataType[] }) => 
       const optionObject = locationKeyArray.map((locationID) => {
         let locationName = siteObject[locationID][siteKeyArray[0]][0].location_descrip
         return (
-          <option key={locationID} value={locationID}>
+          <option key={locationID} value={locationID} >
             {locationName}
           </option>
         )
