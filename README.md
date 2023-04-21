@@ -1,5 +1,5 @@
 # AlertSite Technical Benchmark 
-Get real-time status updates from our remote location servers against major sites with AlertSite Technical Benchmark
+A project created to display real-time status updates from our remote location servers against major sites with AlertSite Technical Benchmark
 
 ## How to navigate: 
 
