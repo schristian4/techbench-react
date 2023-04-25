@@ -16,4 +16,4 @@ Desktop:
 ![Screenshot 2023-04-24 214520](https://user-images.githubusercontent.com/28473506/234154667-d17e9f59-deba-45f0-98a8-2ca208f4b0c9.png)
 
 Mobile: 
-![mobile tech bench](https://user-images.githubusercontent.com/28473506/234339684-9153d436-9d00-4001-b34c-c7abb7ea0589.png)
+![mobile tech bench](https://user-images.githubusercontent.com/28473506/234339994-d59a954b-fc78-437e-b6e6-a06c694912d4.png)
