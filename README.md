@@ -12,8 +12,8 @@ A widget panel can be found at the top indicating the locations reporting the hi
 - Availability: The average percentage of successful tests
 - Response Metrics: Response time of each test run. Red indicating a failed test run. Green indicating a passing test run.
 
-Desktop: 
+## Desktop
 ![Screenshot 2023-04-24 214520](https://user-images.githubusercontent.com/28473506/234154667-d17e9f59-deba-45f0-98a8-2ca208f4b0c9.png)
 
-Mobile: 
+## Mobile
 ![mobile tech bench](https://user-images.githubusercontent.com/28473506/234339994-d59a954b-fc78-437e-b6e6-a06c694912d4.png)
